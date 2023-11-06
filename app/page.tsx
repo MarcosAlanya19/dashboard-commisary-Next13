@@ -1,8 +1,8 @@
-import FormWitness from '../components/RegisterCase/FormWitness';
+import FormCase from '@/components/RegisterCase/FormCase';
 export default function Home() {
   return (
     <>
-      <FormWitness />
+      <FormCase />
     </>
   );
 }
