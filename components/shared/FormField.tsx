@@ -7,7 +7,7 @@ interface FormFieldWithErrorMessageProps {
   label: string;
   name: string;
   className?: string;
-  type: 'text' | 'email';
+  type: 'text' | 'email' | 'datetime'
   formikProps: {
     touched: { [key: string]: boolean };
     errors: { [key: string]: string };

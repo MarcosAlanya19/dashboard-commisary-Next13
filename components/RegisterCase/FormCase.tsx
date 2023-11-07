@@ -1,7 +1,8 @@
 'use client';
 
-import { Button, Chip, Select, SelectItem } from '@nextui-org/react';
-import { Field, Form, Formik } from 'formik';
+import { getCases } from '@/api/case.api';
+import { Button, Input, Textarea } from '@nextui-org/react';
+import { Form, Formik } from 'formik';
 import Image from 'next/image';
 import * as Yup from 'yup';
 import FormField from '../shared/FormField';
@@ -20,12 +21,17 @@ const validationSchema = Yup.object().shape({
   status: Yup.string().required('El estado es obligatorio'),
 });
 
-const FormCase = () => {
+// eslint-disable-next-line @next/next/no-async-client-component
+const FormCase = async () => {
   const handleSubmit = (values: any, { resetForm }: any) => {
     console.log('Datos válidos:', values);
 
     resetForm();
   };
+
+  const data = await getCases();
+
+  console.log(data);
 
   return (
     <div className='min-h-screen bg-[#F2F4FE] flex items-center justify-center p-4'>
@@ -42,8 +48,9 @@ const FormCase = () => {
               <Form className='grid gap-y-4 items-center w-full'>
                 <div className='flex flex-col gap-4 w-96'>
                   <FormField type='text' label='Nombre' name='name' formikProps={formikProps} />
-                  <FormField type='text' label='Descripción' name='description' formikProps={formikProps} />
-                  <FormField type='text' label='Fecha de Inicio' name='start_date' formikProps={formikProps} />
+                  <FormField type='text' label='Nombre' name='name' formikProps={formikProps} />
+                  <Textarea variant='faded' label='Descripcion' placeholder='Ingrese su descripcion' isRequired />
+                  <Input type='date' label='Fecha de Inicio' defaultValue='junior@nextui.org' isRequired />
                   <FormField type='text' label='Estado' name='status' formikProps={formikProps} />
                 </div>
                 <Button type='submit' color='primary' className='w-full col-span-2 font-bold uppercase'>
